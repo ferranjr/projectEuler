@@ -384,7 +384,7 @@ object Problem10 {
   }
 
 
-  val primesIterator: Iterator[Long] =
+  def primesIterator: Iterator[Long] =
     Iterator.iterate(2L){ case i => i + 1 }.filter( isPrime )
 
   def findSumOfPrimesUpTo(n: Long):Long =
