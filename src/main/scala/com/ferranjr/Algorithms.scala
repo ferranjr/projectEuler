@@ -19,7 +19,7 @@ object Algorithms {
    *    }
    *    false
    */
-  def findIfPairsAdds(xs: Array[Int], expected: Int): Boolean = {
+  def findIfPairsAdds(xs: Seq[Int], expected: Int): Boolean = {
     xs.foldLeft(HashSet.empty[Int]){
       case (acc, el) =>
         if(acc.contains(expected - el)) return true
