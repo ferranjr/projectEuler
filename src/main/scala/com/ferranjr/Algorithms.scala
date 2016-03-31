@@ -69,8 +69,8 @@ object Algorithms {
    *  )
    *
    */
-  def getAllPermutations(xs: Seq[Int]):Seq[Seq[Int]] = {
-    xs.foldLeft[Seq[Seq[Int]]](Seq(Seq())){
+  def getAllPermutations[A : Equiv](xs: Seq[A]):Seq[Seq[A]] = {
+    xs.foldLeft[Seq[Seq[A]]](Seq(Seq())){
       case (acc, el) =>
         for{
           x <- xs

@@ -51,4 +51,23 @@ class AlgorithmsSpecs extends FlatSpec with Matchers {
     result.length should ===(testExpected.length)
   }
 
+  it should "give same seq if only one element" in {
+    Algorithms.getAllPermutations(Seq(1)) should ===(Seq(Seq(1)))
+  }
+
+  it should "work for a string" in {
+    val testSeq = "abc"
+    val testExpected = Seq(
+      Seq('a','b','c'),
+      Seq('a','c','b'),
+      Seq('b','a','c'),
+      Seq('b','c','a'),
+      Seq('c','a','b'),
+      Seq('c','b','a')
+    )
+
+    Algorithms.getAllPermutations(testSeq) should ===(testExpected)
+  }
+
+
 }
