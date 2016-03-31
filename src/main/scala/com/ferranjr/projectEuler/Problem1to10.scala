@@ -261,8 +261,8 @@ object Problem6 {
  */
 object Problem7 {
 
-  import Problem3.primes
-  def getTheNthPrime(nth: Int): Int = primes.drop(nth-1).head
+  import Problem10.primesIterator
+  def getTheNthPrime(nth: Int): Long = primesIterator.drop(nth-1).next()
 }
 
 
@@ -382,7 +382,6 @@ object Problem10 {
     val maxToCheck = (Math.sqrt(n) + 0.5).round
     (2L until maxToCheck).forall( d => n % d != 0 )
   }
-
 
   def primesIterator: Iterator[Long] =
     Iterator.iterate(2L){ case i => i + 1 }.filter( isPrime )
