@@ -52,4 +52,31 @@ object Algorithms {
    *
    *
    */
+
+
+  /**
+   * All permutations of a Seq
+   * ~~~~~~
+   * given seq like Seq(1,2,3)
+   * we expect all permutations
+   *  Seq(
+   *    Seq(1,2,3),
+   *    Seq(1,3,2),
+   *    Seq(2,1,3),
+   *    Seq(2,3,1),
+   *    Seq(3,1,2),
+   *    Seq(3,2,1)
+   *  )
+   *
+   */
+  def getAllPermutations(xs: Seq[Int]):Seq[Seq[Int]] = {
+    xs.foldLeft[Seq[Seq[Int]]](Seq(Seq())){
+      case (acc, el) =>
+        for{
+          x <- xs
+          perms <- getAllPermutations(xs.filterNot(_ == x))
+        }
+          yield x +: perms
+    }
+  }
 }

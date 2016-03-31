@@ -32,4 +32,23 @@ class AlgorithmsSpecs extends FlatSpec with Matchers {
 
     Algorithms.findIfPairsAdds(testArray, testExpected) should ===(false)
   }
+
+
+  "getAllPermutations" should "give all permutations for given sequence" in {
+    val testSeq = Seq(1,2,3)
+    val testExpected = Seq(
+        Seq(1,2,3),
+        Seq(1,3,2),
+        Seq(2,1,3),
+        Seq(2,3,1),
+        Seq(3,1,2),
+        Seq(3,2,1)
+      )
+
+    val result = Algorithms.getAllPermutations(testSeq)
+    result should ===(testExpected)
+
+    result.length should ===(testExpected.length)
+  }
+
 }
