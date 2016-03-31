@@ -1,6 +1,6 @@
 package com.ferranjr
 
-import org.scalatest.{Matchers, FlatSpec}
+import org.scalatest.{FlatSpec, Matchers}
 
 
 class AlgorithmsSpecs extends FlatSpec with Matchers {
@@ -69,5 +69,8 @@ class AlgorithmsSpecs extends FlatSpec with Matchers {
     Algorithms.getAllPermutations(testSeq) should ===(testExpected)
   }
 
+  it should "give empty result for empty seq" in {
+    Algorithms.getAllPermutations(Seq.empty[Int]) should ===(Seq(Seq()))
+  }
 
 }
