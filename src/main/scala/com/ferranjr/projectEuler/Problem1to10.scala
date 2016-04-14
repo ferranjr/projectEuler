@@ -13,9 +13,8 @@ object Problem1 {
 
   def sumMultiplesThreeOrFiveBelowNumber( in: Long ):Long = {
 
-    val upTo = in - 1
     def sumMultiplesNum(num: Long): Long = {
-      val n = upTo/num
+      val n = (in - 1)/num
       (num * n * (n+1))/2
     }
     sumMultiplesNum(3) + sumMultiplesNum(5) - sumMultiplesNum(15)

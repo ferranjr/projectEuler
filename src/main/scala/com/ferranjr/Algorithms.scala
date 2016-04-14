@@ -36,17 +36,42 @@ object Algorithms {
    *
    *
    *   a1 > a2 > a3 > a4 > a5
+   *
    *   b1 > b2 > b3 > b4 > b5
+   *
    *   c1 > c2 > c3 > c4 > c5
+   *
    *   d1 > d2 > d3 > d4 > d5
+   *
    *   e1 > e2 > e3 > e4 > e5
    *
    * STEP 1 .
    *   Run all the first ones... which will allow us to discard lots of them
+   *
+   *   a1 > a2 > a3 > a4 > a5
+   *    v
+   *   b1 > b2 > b3 > b4 > b5
+   *    v
+   *   c1 > c2 > c3 > c4 > c5
+   *    v
+   *   d1 > d2 > d3 > d4 > d5
+   *    v
+   *   e1 > e2 > e3 > e4 > e5
+   *
    * STEP 2 .
    *   Discard all the candidates that for sure are slower than the top 3
+   *
+   *   a1 > a2 > a3
+   *    v
+   *   b1 > b2
+   *    v
+   *   c1 
+   *
+   *
    * STEP 3 .
-   *   Run the remaining
+   *   Run the remaining, a part from the first. and the first two will become the 2nd and 3rd at the top
+   *
+   *   a2, a3, b1, b2, c1
    *
    * It should be 7 races to get the right answer
    *
