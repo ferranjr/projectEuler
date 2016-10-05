@@ -1,6 +1,7 @@
 package com.ferranjr
 
 import scala.collection.immutable.HashSet
+import scala.util.Try
 
 object Algorithms {
 
@@ -65,7 +66,7 @@ object Algorithms {
    *    v
    *   b1 > b2
    *    v
-   *   c1 
+   *   c1
    *
    *
    * STEP 3 .
@@ -102,6 +103,67 @@ object Algorithms {
           perms <- getAllPermutations(xs.filterNot(_ == x))
         }
           yield x +: perms
+    }
+  }
+
+  /**
+   * Shil has a string, , consisting of  lowercase English letters. In one operation, he can delete any pair of
+   * adjacent letters with same value. For example, string "" would become either "" or "" after operation.
+   * Shil wants to reduce  as much as possible. To do this, he will repeat the above operation as many times as it
+   * can be performed. Help Shil out by finding and printing 's non-reducible form!
+   *
+   * Note: If the final string is empty, print .
+   *
+   */
+  def deleteAdjacentCharPairs(in: List[Char]): List[Char] = {
+
+    def helper(acc: List[Char]): List[Char] = {
+
+      val res =
+        acc match {
+          case c1 :: c2 :: xs =>
+            if( c1 == c2 )
+              helper(xs)
+            else
+              c1 :: helper( c2 :: xs)
+          case xs =>
+            xs
+        }
+
+      if(res.length == acc.length)
+        res
+      else
+        helper(res)
+    }
+
+    helper(in)
+  }
+
+
+  /**
+    * Longest Perimeter for non-degenerated Triangle created with 3 of the given sticks
+    *
+    * > in:
+    *   5
+    *   1 1 1 3 3
+    *
+    * > out:
+    *   3 3 1
+    *
+    */
+  def longestPerimeterTriangle(in: List[Int]): Option[(Int, Int, Int)] = {
+
+    in.sorted(Ordering.Int.reverse) match {
+      case a :: b :: c :: xs
+        if a < (b + c) =>
+        Some((a, b, c))
+
+      case a :: b :: c :: xs
+        if xs.nonEmpty =>
+        longestPerimeterTriangle( b :: c :: xs )
+
+      case _ =>
+        None
     }
   }
 }

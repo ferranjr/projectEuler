@@ -383,7 +383,7 @@ object Problem10 {
   }
 
   def primesIterator: Iterator[Long] =
-    Iterator.iterate(2L){ case i => i + 1 }.filter( isPrime )
+    Iterator.iterate(2L){ i => i + 1 }.filter( isPrime )
 
   def findSumOfPrimesUpTo(n: Long):Long =
     primesIterator.takeWhile( _ <= n ).sum

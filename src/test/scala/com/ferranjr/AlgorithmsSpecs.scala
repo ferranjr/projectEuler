@@ -73,4 +73,27 @@ class AlgorithmsSpecs extends FlatSpec with Matchers {
     Algorithms.getAllPermutations(Seq.empty[Int]) should ===(Seq(Seq()))
   }
 
+  "deleteCharPairs" should "work as expected" in {
+
+    Algorithms.deleteAdjacentCharPairs("aabbccdde".toList)    should ===(List('e'))
+    Algorithms.deleteAdjacentCharPairs("abbadccdfer".toList)  should ===(List('f','e','r'))
+    Algorithms.deleteAdjacentCharPairs("aabbccdd".toList)     should ===(List.empty[Char])
+
+  }
+
+
+  "LongestPerimeterTriange" should "return -1 when no possible" in {
+
+    Algorithms.longestPerimeterTriangle(List(1, 2, 3)) should ===(None)
+  }
+
+  it should "return the 3 sides when possible" in {
+
+    Algorithms.longestPerimeterTriangle(List(1,1,1,3,3)) should ===(Some( (3, 3, 1) ))
+  }
+
+  it should "work for non straight forward cases" in {
+
+    Algorithms.longestPerimeterTriangle(List(3, 9, 2, 15, 3)) should ===(Some( 3, 3, 2 ))
+  }
 }
