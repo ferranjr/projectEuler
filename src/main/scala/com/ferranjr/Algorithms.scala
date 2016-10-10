@@ -166,4 +166,33 @@ object Algorithms {
         None
     }
   }
+
+
+  /**
+    * Write code to figure out whether or not a given string is a palindrome
+    */
+  def isPalindrome(in: String) : Boolean = {
+
+    // STEP. 1 . straight forward solution
+    // issue, cost of revers is N and compare is also N
+    // cost total 2N so... basically N
+    //    in.reverse == in
+
+    // STEP 2 . more thoughtful solution
+    // although reduces cost to N/2 in bigO will still be N
+    if( in.nonEmpty ) {
+      val half = in.length / 2
+
+      // cost is N / 2 so  N
+      (0 to half).foreach { i =>
+        val a = in.charAt(i)
+        val b = in.charAt(in.length - 1 - i)
+
+        if(a != b) return false
+      }
+      true
+    }
+    else
+      false
+  }
 }

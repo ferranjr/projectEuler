@@ -96,4 +96,23 @@ class AlgorithmsSpecs extends FlatSpec with Matchers {
 
     Algorithms.longestPerimeterTriangle(List(3, 9, 2, 15, 3)) should ===(Some( 3, 3, 2 ))
   }
+
+
+  "isPalindrome" should "be true for palindrome" in {
+
+    val palindromeString = "abba"
+    Algorithms.isPalindrome(palindromeString) should ===(true)
+  }
+
+  it should "be false for non palindrom" in {
+
+    val nonPalindrome = "12345"
+    Algorithms.isPalindrome(nonPalindrome) should ===(false)
+  }
+
+  it should "be false for empty string" in {
+
+    Algorithms.isPalindrome("") should ===(false)
+  }
+
 }
