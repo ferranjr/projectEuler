@@ -115,4 +115,9 @@ class AlgorithmsSpecs extends FlatSpec with Matchers {
     Algorithms.isPalindrome("") should ===(false)
   }
 
+  "reverseWords" should "return olleH dlroW for Hello World" in {
+
+    Algorithms.reverseWords("Hello World") should ===("olleH dlroW".toCharArray)
+  }
+
 }

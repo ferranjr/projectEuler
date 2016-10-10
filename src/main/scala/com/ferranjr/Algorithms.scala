@@ -195,4 +195,24 @@ object Algorithms {
     else
       false
   }
+
+  /**
+    * Given a sentence as a string, reverse each word's
+    * characters and return the whole sentence as a character array.  
+    *
+    * example:
+    *  Hello World  >>  olleH dlroW
+    */
+  def reverseWords(in: String): Array[Char] = {
+
+    in.split(" ")
+      .foldLeft(Array.empty[Char]){
+        case (acc, c) =>
+          if(acc.nonEmpty)
+            acc ++ " " ++ c.reverse
+          else
+            c.reverse.toCharArray
+      }
+  }
+
 }
