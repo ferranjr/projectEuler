@@ -1,6 +1,7 @@
 package com.ferranjr
 
 import scala.collection.immutable.HashSet
+import scala.collection.mutable
 import scala.util.Try
 
 object Algorithms {
@@ -215,4 +216,106 @@ object Algorithms {
       }
   }
 
+
+  /**
+    * Random Interview Question from Internet
+    * ~~~~~
+    *
+    * Writing programming interview questions hasn't made me rich. Maybe trading Apple stocks will.
+    * Suppose we could access yesterday's stock prices as a list, where:
+    *
+    * The indices are the time in minutes past trade opening time, which was 9:30am local time.
+    * The values are the price in dollars of Apple stock at that time.
+    * So if the stock cost $500 at 10:30am, stock_prices_yesterday[60] = 500.
+    *
+    * Write an efficient function that takes stock_prices_yesterday and returns the best profit
+    * I could have made from 1 purchase and 1 sale of 1 Apple stock yesterday.
+    *
+    * For example:
+    *
+    *   stock_prices_yesterday = [10, 7, 5, 8, 11, 9]
+    *
+    *   get_max_profit(stock_prices_yesterday)
+    *   # returns 6 (buying for $5 and selling for $11)
+    *
+    * No "shorting"—you must buy before you sell. You may not buy and sell in the same time step
+    * (at least 1 minute must pass).
+    */
+  def getMaxProfit( stockPrices: List[Int] ): Option[Int] =
+    stockPrices match {
+      case Nil =>
+        None
+
+      case firstStockPrice :: xs =>
+        val ( _, maxProfit) =
+          xs.foldLeft(( firstStockPrice, None:Option[Int])){
+            case ((curMinPrice, curMaxProfit), curPrice) =>
+              (
+                Math.min(curPrice, curMinPrice),
+                getMinNewProfitOpt( curPrice, curMinPrice, curMaxProfit )
+              )
+          }
+
+      maxProfit
+    }
+
+  private def getMinNewProfitOpt( curPrice: Int, curMinPrice: Int, curMaxProfit: Option[Int]): Option[Int] = {
+    val possibleNewProfit = curPrice - curMinPrice
+    if( possibleNewProfit >= 0 && curMaxProfit.isEmpty)
+      Some(possibleNewProfit)
+    else if ( curMaxProfit.isDefined )
+      Some(Math.max( curMaxProfit.get, possibleNewProfit ))
+    else
+      None
+  }
+
+
+  /**
+    * You have an array of integers, and for each index you want to find the product of every integer except the
+    * integer at that index.
+    * Write a function getProductsOfAllIntsExceptAtIndex() that takes an array of integers and returns an array of the products.
+    *
+    *   For example, given:
+    *
+    *     [1, 7, 3, 4]
+    *
+    *   your function would return:
+    *
+    *     [84, 12, 28, 21]
+    *
+    *   by calculating:
+    *
+    *     [7*3*4, 1*3*4, 1*7*4, 1*7*3]
+    *
+    *   Do not use division in your solution.
+    *
+    *
+    *   // Currently Time complexity: 3N => so N
+    *   // Espace could be improve by generating one mutable array from
+    *      get productsBeforeIndex and then just calculate the  productafter index
+    *      and multiply it and update by the value on previous array.
+    */
+  def getProductsOfAllIntsExceptAtIndex( xs: Seq[Int] ):Seq[Int] = {
+
+    val getProductsBeforeIndex: Array[Int] = {
+      xs.foldLeft( (Array.empty[Int], 1) ){
+        case ((arr, prev), cur) =>
+          (arr :+ prev, prev * cur)
+      }._1
+    }
+
+    val getProductsAfterIndex: Array[Int] = {
+      var productSoFar = 1
+      val arrProduct = new Array[Int](xs.length)
+      for( j <- xs.indices.reverse ){
+        arrProduct(j) = productSoFar
+        productSoFar *= xs(j)
+      }
+      arrProduct
+    }
+
+    getProductsBeforeIndex
+      .zip(getProductsAfterIndex)
+      .map{ case (a, b) => a * b }
+  }
 }

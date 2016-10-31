@@ -120,4 +120,41 @@ class AlgorithmsSpecs extends FlatSpec with Matchers {
     Algorithms.reverseWords("Hello World") should ===("olleH dlroW".toCharArray)
   }
 
+  "getMaxProfit" should "return 6 given the example" in {
+
+    val stockPricesYesterday = List( 10, 7, 5, 8, 11, 9 )
+
+    Algorithms.getMaxProfit(stockPricesYesterday) shouldBe Some(6)
+  }
+
+  it should "return 0 if never change value" in {
+
+    val stockPricesYesterday = List.fill(5)(10)
+
+    Algorithms.getMaxProfit(stockPricesYesterday) shouldBe Some(0)
+
+  }
+
+  it should "work if only goes up at the beginning and then drops" in {
+    val stockPricesYesterday = List( 10, 12, 9, 8, 7, 6 )
+
+    Algorithms.getMaxProfit(stockPricesYesterday) shouldBe Some(2)
+  }
+
+  it should "no possible answer due it shouldn't have bought" in {
+    val stockPricesYesterday = List( 10, 9, 8, 7, 6, 5 )
+
+    Algorithms.getMaxProfit(stockPricesYesterday) shouldBe None
+  }
+
+  it should "return None for empty list" in {
+    val stockPricesYesterday = List.empty[Int]
+
+    Algorithms.getMaxProfit(stockPricesYesterday) shouldBe None
+  }
+
+  "getProductsOfAllIntsExceptAtIndex" should "work as per example" in {
+    Algorithms
+      .getProductsOfAllIntsExceptAtIndex( List(1,7,3,4) ).toList shouldBe List(7*3*4, 1*3*4, 1*7*4, 1*7*3)
+  }
 }
