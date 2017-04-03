@@ -19,4 +19,16 @@ class InterviewSpecs extends FlatSpec with Matchers {
     arrayHasSum(List(2, 3, 4, 5, 5, 1), 19) shouldBe false
   }
 
+  "itinerary" should "work as example" in {
+
+    itinerary(
+      Map(
+        "YYZ"->"NYC",
+        "YVR"->"SFO",
+        "SFO"->"YYZ"
+      )
+    ) should contain theSameElementsInOrderAs  List("YVR", "SFO", "YYZ", "NYC")
+
+  }
+
 }
